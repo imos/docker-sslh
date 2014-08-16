@@ -4,6 +4,7 @@
 : ${CPU:=100}
 : ${MEMORY:=100M}
 : ${DISK:=5G}
+: ${SSLH_PORT:=0.0.0.0:443}
 
 set -e -u
 
@@ -18,7 +19,9 @@ docker_build() {
 
 docker_run() {
   local docker_flags=("${DOCKER_FLAGS[@]}")
-  docker_flags+=(--memory="${MEMORY}" --cpu-shares="${CPU}")
+  docker_flags+=(
+      --memory="${MEMORY}" --cpu-shares="${CPU}"
+      --publish="${SSLH_PORT}:443")
   docker run "${docker_flags[@]}" "${SERVICE}" "$@"
 }
 
