@@ -7,7 +7,7 @@
 
 set -e -u
 
-if [ "$(whoami)" != 'root']; then
+if [ "$(whoami)" != 'root' ]; then
   echo 'this script must run as root.' >&2
   exit 1
 fi
